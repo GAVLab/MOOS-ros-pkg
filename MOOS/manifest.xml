@@ -1,0 +1,15 @@
+<package>
+  <description brief="MOOS">
+
+     Contains MOOS (http://www.robots.ox.ac.uk/~mobile/MOOS/wiki/pmwiki.php)
+
+  </description>
+  <author>William Woodall</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MOOS</url>
+  <rosdep name="fltk" />
+
+</package>
+
+

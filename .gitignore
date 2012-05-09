@@ -10,3 +10,9 @@
 *.lai
 *.la
 *.a
+
+# common build folders
+bin
+build
+lib
+installed
