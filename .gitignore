@@ -16,3 +16,5 @@ bin
 build
 lib
 installed
+patched
+rospack*
