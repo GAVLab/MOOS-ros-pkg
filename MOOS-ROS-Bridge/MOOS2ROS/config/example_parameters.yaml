@@ -1,0 +1,28 @@
+MOOS2ROS:
+    Xbow440: # Grouping MOOS variables into ROS msgs
+        # http://www.ros.org/doc/api/sensor_msgs/html/msg/Imu.html
+        msg_type: 'sensor_msgs/Imu' # ROS msg type Required
+        topic_name: '/xbow440/data'
+        frame_id: 'imu_link' # The timestamp and sequence number are handled
+        mappings: { # Key and Value pairs mapping ROS msg entries to MOOS variables
+            'orientation.x': 0.0, # Static value (optional)
+            'orientation.y': 0.0, # Static value (optional)
+            'orientation.z': 0.0, # Static value (optional)
+            'orientation.w': 0.0, # Static value (optional)
+            'angular_velocity.x': {'MOOS_Variable': 'zGyroX_gXbow440'},
+            'angular_velocity.y': {'MOOS_Variable': 'zGyroY_gXbow440'},
+            'angular_velocity.z': {'MOOS_Variable': 'zGyroZ_gXbow440'},
+            'linear_acceleration.x': {'MOOS_Variable': 'zAccelX_gXbow440'},
+            'linear_acceleration.y': {'MOOS_Variable': 'zAccelY_gXbow440'},
+            'linear_acceleration.z': {'MOOS_Variable': 'zAccelZ_gXbow440'}
+        }
+    Novatel:
+        # http://www.ros.org/doc/api/sensor_msgs/html/msg/NavSatFix.html
+        msg_type: 'sensor_msgs/NavSatFix'
+        topic_name: '/novatel/data'
+        frame_id: 'novatel_link'
+        mappings: {
+            'latitude': {'MOOS_Variable': 'zLat'},
+            'longitude': {'MOOS_Variable': 'zLong'}
+            'altitude': {'MOOS_Variable': 'zHeight'}
+        }

@@ -2,8 +2,8 @@ all: installed
 
 SVN_DIR = build/pyMOOS_svn
 SVN_URL = https://pymoos.svn.sourceforge.net/svnroot/pymoos
-# SVN_PATCH = 
-# SVN_REVISION=-r###
+SVN_PATCH = pymoos_r16_py3k_option.patch
+SVN_REVISION=-r16
 include $(shell rospack find mk)/svn_checkout.mk
 
 CMAKE = cmake

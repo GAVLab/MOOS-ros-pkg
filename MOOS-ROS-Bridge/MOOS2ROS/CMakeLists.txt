@@ -21,4 +21,4 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
-rosbuild_add_executable(MOOS2ROS src/main.cc src/moos2ros.cc)
+rosbuild_add_executable(MOOS2ROS src/moos2ros.cc)

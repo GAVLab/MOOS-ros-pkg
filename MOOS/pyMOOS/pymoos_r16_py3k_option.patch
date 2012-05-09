@@ -1,0 +1,80 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 16)
++++ CMakeLists.txt	(working copy)
+@@ -12,17 +12,31 @@
+     MESSAGE(FATAL_ERROR "Unable to find correct Boost version. Did you set BOOST_ROOT?")
+ ENDIF()
+ 
+-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/config/)
+-find_package(Python32Interp REQUIRED)
+-find_package(Python32Libs REQUIRED)
++OPTION(USE_PYTHON3 "Whether or not to use Python3" OFF)
+ 
+-IF(NOT PYTHON3LIBS_FOUND)
+-    MESSAGE(FATAL_ERROR "Failed to find the python libraries")
+-ENDIF()
++IF(USE_PYTHON3)
++    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/config/)
++    find_package(Python32Interp REQUIRED)
++    find_package(Python32Libs REQUIRED)
+ 
++    IF(NOT PYTHON3LIBS_FOUND)
++        MESSAGE(FATAL_ERROR "Failed to find the python libraries")
++    ENDIF()
++    set(PYTHON_EXECUTABLE ${PYTHON3_EXECUTABLE})
++    set(PYTHON_LIBRARIES ${PYTHON3_LIBRARIES})
++    set(PYTHON_INCLUDE_DIRS ${PYTHON3_INCLUDE_DIRS})
++ELSE(USE_PYTHON3)
++    find_package(PythonInterp REQUIRED)
++    find_package(PythonLibs REQUIRED)
++
++    IF(NOT PYTHONLIBS_FOUND)
++        MESSAGE(FATAL_ERROR "Failed to find the python libraries")
++    ENDIF()
++ENDIF(USE_PYTHON3)
++
+ # determine directory to install python files in
+ EXECUTE_PROCESS(COMMAND
+-	${PYTHON3_EXECUTABLE} -c "import distutils.sysconfig, sys; sys.stdout.write(distutils.sysconfig.get_python_lib(0,0,\"\"))"
++	${PYTHON_EXECUTABLE} -c "import distutils.sysconfig, sys; sys.stdout.write(distutils.sysconfig.get_python_lib(0,0,\"\"))"
+ 		OUTPUT_VARIABLE PYTHON_INSTALL
+ 		ERROR_VARIABLE PYTHON_STDERR
+ 		RESULT_VARIABLE PYTHON_ERR
+@@ -60,7 +74,7 @@
+ 
+ INCLUDE_DIRECTORIES(
+     ${Boost_INCLUDE_DIRS} 
+-    ${PYTHON3_INCLUDE_DIRS}
++    ${PYTHON_INCLUDE_DIRS}
+     "../")
+ 
+ SET(Boost_USE_STATIC_LIBS OFF)
+@@ -74,15 +88,15 @@
+ LINK_DIRECTORIES( ${MOOS_LIBRARY_DIRS} )
+ 
+ ADD_LIBRARY(CMOOSMsg SHARED src/pyMOOSMsg.cpp )
+-TARGET_LINK_LIBRARIES(CMOOSMsg ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON3_LIBRARIES})
++TARGET_LINK_LIBRARIES(CMOOSMsg ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON_LIBRARIES})
+ SET_TARGET_PROPERTIES(CMOOSMsg PROPERTIES PREFIX "") # remove 'lib' prefix
+ 
+ ADD_LIBRARY(XPCTcpSocket SHARED src/pyXPCTcpSocket.cpp)
+-TARGET_LINK_LIBRARIES(XPCTcpSocket ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON3_LIBRARIES})
++TARGET_LINK_LIBRARIES(XPCTcpSocket ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON_LIBRARIES})
+ SET_TARGET_PROPERTIES(XPCTcpSocket PROPERTIES PREFIX "")
+ 
+ ADD_LIBRARY(CMOOSCommPkt SHARED src/pyMOOSCommPkt.cpp  ${CMOOSMsg_SRC} )
+-TARGET_LINK_LIBRARIES(CMOOSCommPkt ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON3_LIBRARIES})
++TARGET_LINK_LIBRARIES(CMOOSCommPkt ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON_LIBRARIES})
+ SET_TARGET_PROPERTIES(CMOOSCommPkt PROPERTIES PREFIX "") 
+ 
+ SET(CMOOSCommObject_SRC   
+@@ -91,7 +105,7 @@
+     )
+ 
+ ADD_LIBRARY(CMOOSCommObject SHARED ${CMOOSCommObject_SRC} )
+-TARGET_LINK_LIBRARIES(CMOOSCommObject ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON3_LIBRARIES})
++TARGET_LINK_LIBRARIES(CMOOSCommObject ${Boost_LIBRARIES} ${MOOS_LIBRARIES} ${PYTHON_LIBRARIES})
+ SET_TARGET_PROPERTIES(CMOOSCommObject PROPERTIES PREFIX "") 
+ 
+ file(COPY python/MOOSCommClient.py DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
