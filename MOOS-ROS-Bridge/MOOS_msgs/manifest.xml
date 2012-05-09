@@ -1,0 +1,14 @@
+<package>
+  <description brief="MOOS_msgs">
+
+     MOOS_msgs
+
+  </description>
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MOOS_msgs</url>
+
+</package>
+
+

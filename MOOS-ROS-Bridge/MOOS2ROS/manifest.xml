@@ -1,0 +1,27 @@
+<package>
+  <description brief="MOOS2ROS">
+
+     MOOS2ROS
+
+  </description>
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MOOS2ROS</url>
+  <depend package="MOOS"/>
+  <depend package="pyMOOS"/>
+  <depend package="MOOS_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="roslib"/>
+  <depend package="std_msgs"/>
+  <depend package="diagnostic_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="trajectory_msgs"/>
+  <depend package="visualization_msgs"/>
+
+</package>
+
+

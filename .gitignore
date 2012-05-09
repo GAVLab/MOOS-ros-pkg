@@ -18,3 +18,4 @@ lib
 installed
 patched
 rospack*
+msg_gen

@@ -10,6 +10,10 @@
   <url>http://ros.org/wiki/MOOS</url>
   <rosdep name="fltk" />
 
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lMOOS -lMOOSGen"/>
+  </export>
+
 </package>
 
 

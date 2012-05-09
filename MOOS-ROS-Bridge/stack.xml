@@ -1,0 +1,9 @@
+<stack>
+  <description brief="MOOS-ROS-Bridge">MOOS-ROS-Bridge</description>
+  <author>Maintained by William Woodall</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/MOOS-ROS-Bridge</url>
+  <depend stack="ros" />
+
+</stack>
