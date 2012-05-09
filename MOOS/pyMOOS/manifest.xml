@@ -1,0 +1,15 @@
+<package>
+  <description brief="pyMOOS">
+
+     pyMOOS
+
+  </description>
+  <author>William Woodall</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pyMOOS</url>
+  <depend package="MOOS"/>
+
+</package>
+
+

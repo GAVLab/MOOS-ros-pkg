@@ -1,0 +1,16 @@
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 2354)
++++ CMakeLists.txt	(working copy)
+@@ -171,6 +171,11 @@
+ 
+ ENDIF(UNIX)
+ 
++# On Apple the location of libpng is odd
++IF(APPLE)
++  LINK_DIRECTORIES(/usr/X11/lib)
++ENDIF(APPLE)
++
+ #name the MOOSLIBS
+ SET(MOOSLIBS ${MOOSLIBS} MOOS MOOSGen)
+ 
