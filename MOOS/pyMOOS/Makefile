@@ -19,8 +19,7 @@ installed: $(SVN_DIR)
 	cd $(SVN_DIR)/build && $(CMAKE) $(CMAKE_ARGS) ..
 	cd $(SVN_DIR)/build && make $(ROS_PARALLEL_JOBS) && make install
 	mkdir -p src
-	mv lib/python2.7/site-packages/pymoos src/pymoos
-	rm -rf lib
+	mv pymoos src/pymoos
 	touch installed
 
 cleaned: Makefile
